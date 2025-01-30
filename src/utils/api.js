@@ -22,21 +22,6 @@ export const fetchDataFromApi = async (url) => {
   }
 };
 
-export const fetchAllProductData = async (url) => {
-  try {
-    const { data } = await axios.get(process.env.REACT_APP_API_URL + url, { headers: getAuthHeaders() });
-    return data;
-  } catch (error) {
-    if (error.response) {
-      // Throw meaningful error message from the backend
-      throw new Error(error.response.data.message || "An unexpected error occurred.");
-    } else {
-      // Handle network or other unexpected errors
-      throw new Error("Network error. Please try again later.");
-    }
-  }
-};
-
 export const postData = async (url, formData) => {
   try {
     const { data } = await axios.post(process.env.REACT_APP_API_URL + url, formData, { headers: getAuthHeaders() });
@@ -114,14 +99,3 @@ export const uploadImage = async (url, formData) => {
     }
   }
 };
-
-export const checkPincodeServiceability = async(url, pinCode)=>{
-  try{
-      const response = await axios.get(process.env.REACT_APP_API_URL+url+pinCode);
-      return response.data;
-  }
-  catch(err){
-    console.log(err)
-      throw new Error("Network Error. Please try again later")
-  }
-}

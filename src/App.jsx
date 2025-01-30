@@ -15,6 +15,8 @@ import ExpiredVerifition from "./Pages/Auth/VerificationExpired/index";
 import AlreadyVerified from "./Pages/Auth/AlreadyVrified/index";
 import ForgotPassword from "./Pages/Auth/ForgotPassword/index";
 import ForgotPasswordConfirm from "./Pages/Auth/ConfirmForgotPassword/index";
+import MyAccount from "./Pages/MyAccount";
+import FriendProfile from "./Pages/FriendProfile/index";
 
 function App() {
   return (
@@ -46,9 +48,9 @@ function App() {
 
           <Route path="/signIn" exact={true} element={<SignIn />} />
           <Route path="/signUp" exact={true} element={<SignUp />} />
+          <Route path="user/:username" exact={true} element={<FriendProfile />} />
 
           {/* user */}
-
           <Route path="/" exact={true} element={<Home />} />
         </Routes>
       </BrowserRouter>

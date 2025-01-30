@@ -36,33 +36,6 @@ const Home = () => {
       <HeroSection />
       <BenefitesFriendHive />
       <HowWork />
-      {/* <Testimonial /> */}
-      {/* <div className="container" style={{ marginTop: "3rem" }}>
-        <h2
-          style={{
-            fontSize: "1.35rem",
-            color: "var(--textColor)",
-            fontWeight: "500",
-          }}
-        >
-          Grow your connections
-        </h2>
-        <p
-          style={{
-            fontSize: "1rem",
-            textAlign: "justify",
-            fontWeight: "normal",
-            color: "var(--textLight)",
-          }}
-        >
-          At FriendHive, we offer a wide range of social networking features that
-          help you connect with like-minded people. Our platform is designed to
-          provide a safe, engaging space for individuals to build meaningful
-          friendships, share moments, and discover new experiences. Join us today and
-          start your journey towards building lasting friendships, all from the
-          comfort of your home!
-        </p>
-      </div> */}
       <GetInTouch/>
       <Footer />
     </>
