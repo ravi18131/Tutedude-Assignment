@@ -6,12 +6,13 @@ import GetInTouch from "../../Components/GetInTouch/GetInTouch";
 import FriendProfileCard from "../../Components/FriendProfileCard/Profile";
 
 const FriendProfile = () => {
-
+    const user = localStorage.getItem("user");
+    const parseUserData = JSON.parse(user);
     return (
         <>
             <Header />
             <FriendProfileCard />
-            {/* <GetInTouch /> */}
+            {!parseUserData && <GetInTouch />}
             <Footer />
         </>
     );
