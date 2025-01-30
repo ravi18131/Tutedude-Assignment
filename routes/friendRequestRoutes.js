@@ -6,7 +6,10 @@ const friendRequestController = require('../controllers/friendRequestController'
 router.get('/', friendRequestController.getFriendRequests);
 
 // Get a single friend request by ID
-router.get('/:id', friendRequestController.getFriendRequestById);
+router.get('/check-connection', friendRequestController.getAlredySendFriendRequestData);
+
+// Get a single friend request by ID
+router.get('/mutual-connections', friendRequestController.getMutualConnections);
 
 // Send a friend request
 router.post('/', friendRequestController.sendFriendRequest);

@@ -26,16 +26,111 @@ const getFriendRequests = async (req, res) => {
 };
 
 // Retrieve a single friend request by ID
-const getFriendRequestById = async (req, res) => {
+const getAlredySendFriendRequestData = async (req, res) => {
+    const { sender, receiver } = req.query; // Get sender and receiver from the query parameters
+
+    if (!sender || !receiver) {
+        return res.status(400).json({ message: 'Sender and receiver are required' });
+    }
+
+    console.log(req.query);
+
     try {
-        const friendRequest = await FriendRequest.findById(req.params.id).populate('sender receiver');
-        if (!friendRequest) return res.status(404).json({ success: false, message: "Friend request not found" });
-        return res.status(200).json({ success: true, data: friendRequest });
+        // Fetch the friend request data where sender and receiver match
+        const friendRequest = await FriendRequest.findOne({
+            sender: sender,
+            receiver: receiver
+        });
+
+        if (!friendRequest) {
+            return res.status(404).json({ message: 'Friend request not found' });
+        }
+
+        console.log("friendRequest", friendRequest)
+        // If request found, return the data
+        return res.status(200).json(friendRequest);
     } catch (error) {
-        console.error(error);
-        return res.status(400).json({ success: false, message: "Bad Request" });
+        console.error("Error fetching friend request:", error);
+        return res.status(500).json({ message: "Internal server error" });
     }
 };
+
+const getMutualConnections = async (req, res) => {
+    try {
+        const { sender, receiver } = req.query; // Get sender and receiver from the query params
+
+        const mutualConnections = await FriendRequest.aggregate([
+            {
+                $match: {
+                    status: "accepted",
+                    $or: [
+                        { sender: sender },
+                        { receiver: sender }
+                    ],
+                },
+            },
+            {
+                $project: {
+                    friends: {
+                        $cond: [
+                            { $eq: ["$sender", sender] },
+                            "$receiver",
+                            "$sender",
+                        ],
+                    },
+                },
+            },
+            {
+                $group: {
+                    _id: "$friends",
+                },
+            },
+            {
+                $lookup: {
+                    from: "friendrequests",
+                    let: { friendId: "$_id" },
+                    pipeline: [
+                        {
+                            $match: {
+                                status: "accepted",
+                                $or: [
+                                    { sender: receiver },
+                                    { receiver: receiver },
+                                ],
+                            },
+                        },
+                        {
+                            $project: {
+                                _id: 1,
+                            },
+                        },
+                    ],
+                    as: "mutualFriends",
+                },
+            },
+            {
+                $match: {
+                    "mutualFriends": { $ne: [] },
+                },
+            },
+            {
+                $project: {
+                    mutualFriendId: "$_id",
+                },
+            },
+        ]);
+
+        if (mutualConnections.length === 0) {
+            return res.status(200).json({ message: "No mutual connections found." });
+        }
+
+        res.status(200).json(mutualConnections);
+    } catch (error) {
+        console.error("Error finding mutual connections:", error);
+        res.status(500).json({ message: "Internal server error." });
+    }
+};
+
 
 // Send a friend request (Create a new friend request)
 const sendFriendRequest = async (req, res) => {
@@ -114,7 +209,8 @@ const deleteFriendRequest = async (req, res) => {
 
 module.exports = {
     getFriendRequests,
-    getFriendRequestById,
+    getMutualConnections,
+    getAlredySendFriendRequestData,
     sendFriendRequest,
     updateFriendRequestStatus,
     deleteFriendRequest,
