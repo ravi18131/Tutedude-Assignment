@@ -7,7 +7,7 @@ const authMiddleware = require('../middleware/auth');
 router.post('/signup', userController.signUp);
 
 // User Login
-router.post('/login', userController.login);
+router.post('/signin', userController.login);
 
 // Get User Profile (protected route)
 router.get('/profile', authMiddleware, userController.getUserProfile);

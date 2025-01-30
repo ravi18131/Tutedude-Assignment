@@ -20,7 +20,23 @@ const userSchema = new mongoose.Schema({
     hobbies: [String], // Optional
     bio: String, // Optional
     interests: [String], // Optional
-  }
+  },
+  isVerified: {
+    type: Boolean,
+    default: false
+  },
+  provider: {
+    type: String,
+    default: 'local'
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  },
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);
