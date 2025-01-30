@@ -11,7 +11,6 @@ import HeroSection from "../../Components/HeroSection/HeroSection"
 import BenefitesFriendHive from "../../Components/BenefitesFriendHive/BenefitesFriendHive";
 import HowWork from "../../Components/HowWork/HowWork"
 import GetInTouch from "../../Components/GetInTouch/GetInTouch";
-import Testimonial from "../../Components/Tranding/Tranding";
 
 const Home = () => {
 

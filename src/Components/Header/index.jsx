@@ -143,7 +143,7 @@ const Header = () => {
                               My Account
                             </MenuItem>
                           </Link>
-                          <Link to="/orders">
+                          <Link to="/friend-requests">
                             <MenuItem onClick={handleClose}>
                               <ListItemIcon>
                                 <FaClipboardCheck fontSize="small" />
