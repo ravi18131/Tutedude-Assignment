@@ -20,9 +20,8 @@ import { useNavigate } from "react-router-dom";
 const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formfields, setFormfields] = useState({
-    name: "",
+    username: "",
     email: "",
-    phone: "",
     password: "",
   });
 
@@ -41,10 +40,10 @@ const SignUp = () => {
     }));
   };
 
-  const register = (e) => {
+  const register = async (e) => {
     e.preventDefault();
     try {
-      if (formfields.name === "") {
+      if (formfields.username === "") {
         showSnackbar("name can not be blank!", "error", "#f1b9b9");
         return false;
       }
@@ -54,40 +53,37 @@ const SignUp = () => {
         return false;
       }
 
-      if (formfields.phone === "") {
-        showSnackbar("phone can not be blank!", "error", "#f1b9b9");
-        return false;
-      }
-
       if (formfields.password === "") {
         showSnackbar("password can not be blank!", "error", "#f1b9b9");
         return false;
       }
 
       setIsLoading(true);
+      try {
+        const res = await postData("/api/user/signup", formfields);
 
-      postData("/api/user/signup", formfields)
-        .then((res) => {
-          if (res.success !== false) {
-            showSnackbar("Register Successfully!", "success", "#aadbaa");
+        if (res.success !== false) {
+          showSnackbar("Register Successfully!", "success", "#aadbaa");
 
-            setTimeout(() => {
-              setIsLoading(true);
-              history("/signIn");
-            }, 2000);
-          } else {
-            setIsLoading(false);
-            const msg = res.message || "Internal srever error!!"
-            // showSnackbar(msg, "error", "#f1b9b9");
-          }
-        })
-        .catch((error) => {
-          const msg = error.message || "Internal srever error!!"
-          // showSnackbar(msg, "error", "#f1b9b9");
-        });
+          setTimeout(() => {
+            setIsLoading(true);
+            history("/signIn");
+          }, 2000);
+        } else {
+          const msg = res.message || "Internal server error!!";
+          showSnackbar(msg, "error", "#f1b9b9");
+        }
+      } catch (error) {
+        const msg = error.message || "Internal server error!!";
+        showSnackbar(msg, "error", "#f1b9b9");
+      } finally {
+        setIsLoading(false);
+      }
     } catch (error) {
       const msg = error.message || "Internal srever error!!"
-      // showSnackbar(msg, "error", "#f1b9b9");
+      showSnackbar(msg, "error", "#f1b9b9");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -99,9 +95,8 @@ const SignUp = () => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams) {
       const token = urlParams.get("token");
-      const name = urlParams.get("name");
+      const username = urlParams.get("username");
       const email = urlParams.get("email");
-      const role = urlParams.get("role");
       const userId = urlParams.get("userId");
       const avatar = urlParams.get("avatar");
 
@@ -111,7 +106,7 @@ const SignUp = () => {
         localStorage.setItem("token", token); // Save token to local storage
         localStorage.setItem(
           "user",
-          JSON.stringify({ name, email, role, userId, avatar })
+          JSON.stringify({ username, email, userId, avatar })
         ); // Save user data to local storage
 
         showSnackbar("Login Successful!", "success", "#aadbaa");
@@ -127,11 +122,7 @@ const SignUp = () => {
     const parseUserData = JSON.parse(user);
 
     if (token && parseUserData) {
-      if (parseUserData.role === "user") {
-        history("/");
-      } else if (parseUserData.role === "admin") {
-        history("/admin/dashboard");
-      }
+      history("/");
     }
   }, [history]);
 
@@ -186,32 +177,15 @@ const SignUp = () => {
               Sign Up
             </Typography>
 
-            <Box className="row">
-              <Box className="col-md-6">
-                <Box className="form-group">
-                  <TextField
-                    label="Name"
-                    name="name"
-                    onChange={onchangeInput}
-                    type="text"
-                    variant="standard"
-                    className="w-100"
-                  />
-                </Box>
-              </Box>
-
-              <Box className="col-md-6">
-                <Box className="form-group">
-                  <TextField
-                    label="Phone No."
-                    name="phone"
-                    onChange={onchangeInput}
-                    type="text"
-                    variant="standard"
-                    className="w-100"
-                  />
-                </Box>
-              </Box>
+            <Box className="form-group">
+              <TextField
+                label="Username"
+                name="username"
+                onChange={onchangeInput}
+                type="text"
+                variant="standard"
+                className="w-100"
+              />
             </Box>
 
             <Box className="form-group">

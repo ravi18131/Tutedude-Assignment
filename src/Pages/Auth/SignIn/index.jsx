@@ -46,11 +46,7 @@ const SignIn = () => {
   useEffect(() => {
     // Check if user is authenticated based on token stored in local storage
     if (token && parseUserData) {
-      if (parseUserData.role === "user") {
-        history("/");
-      } else if (parseUserData.role === "admin") {
-        history("/admin/dashboard");
-      }
+      history("/");
     }
   }, [history]);
 
@@ -76,28 +72,23 @@ const SignIn = () => {
         localStorage.setItem("token", res.token);
 
         const user = {
-          name: res.user?.name,
+          username: res.user?.username,
           email: res.user?.email,
           userId: res.user?.id,
-          role: res.user?.role,
           avatar: res.user?.avatar || "",
         };
 
         localStorage.setItem("user", JSON.stringify(user));
         const msg = res.message || "Login successfully!!"
         showSnackbar(msg, "success", "#aadbaa");
-        if (user.role === "user") {
-          history("/");
-        } else if (user.role === "admin") {
-          history("/admin/dashboard");
-        }
+        history("/");
       } else {
         const msg = res.message || "Something went wrong!!"
-        // showSnackbar(msg, "error", "#f1b9b9");
+        showSnackbar(msg, "error", "#f1b9b9");
       }
     } catch (error) {
       const msg = error.message || "Internal srever error!!"
-      // showSnackbar(msg, "error", "#f1b9b9");
+      showSnackbar(msg, "error", "#f1b9b9");
     } finally {
       setIsLoading(false);
     }
@@ -107,9 +98,8 @@ const SignIn = () => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams) {
       const token = urlParams.get("token");
-      const name = urlParams.get("name");
+      const username = urlParams.get("username");
       const email = urlParams.get("email");
-      const role = urlParams.get("role");
       const userId = urlParams.get("userId");
       const avatar = urlParams.get("avatar");
 
@@ -119,14 +109,10 @@ const SignIn = () => {
         localStorage.setItem("token", token); // Save token to local storage
         localStorage.setItem(
           "user",
-          JSON.stringify({ name, email, role, userId, avatar })
+          JSON.stringify({ username, email, userId, avatar })
         ); // Save user data to local storage
         showSnackbar("Login Successful!!", "success", "#aadbaa");
-        if (role === "user") {
-          history("/");
-        } else if (role === "admin") {
-          history("/admin/dashboard");
-        }
+        history("/");
       }
     }
   }, []);
@@ -190,8 +176,8 @@ const SignIn = () => {
             <Box className="form-group">
               <TextField
                 id="standard-basic"
-                label="Email"
-                type="email"
+                label="Email/Username"
+                type="text"
                 required
                 variant="standard"
                 className="w-100"

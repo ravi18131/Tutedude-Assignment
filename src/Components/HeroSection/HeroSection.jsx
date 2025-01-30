@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"; // For React Router in place of Next.js
 import { Chip, Stack, useMediaQuery } from "@mui/material";
 import { FaHashtag } from "react-icons/fa";
 import { RiHashtag } from "react-icons/ri";
-import heroSectionImg from "../../assets/images/hero-section.webp"
+import heroSectionImg from "../../assets/images/hero.png"
 import "./HeroSection.css";
 
 const HomePageHeader = () => {
@@ -36,7 +36,7 @@ const HomePageHeader = () => {
             </p>
 
             <div>
-              <Link to="#" className="hero-section-btn">
+              <Link to="/signin" className="hero-section-btn">
                 Join now
               </Link>
             </div>
