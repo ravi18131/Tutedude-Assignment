@@ -97,7 +97,6 @@ const MyAccount = () => {
       history("/signIn");
     }
 
-    deleteData("/api/imageUpload/deleteAllImages");
     const user = JSON.parse(localStorage.getItem("user"));
 
     fetchDataFromApi(`/api/user/${user?.userId}`).then((res) => {

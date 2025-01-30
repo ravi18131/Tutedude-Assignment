@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { fetchDataFromApi } from "../../utils/api";
 import axios from "axios";
 import {
   Box,
@@ -11,45 +12,48 @@ import {
   CircularProgress,
   Grid,
   Paper,
+  Chip,
+  IconButton,
 } from "@mui/material";
+import { Add, Delete } from "@mui/icons-material";
 
 const AdminProfilePage = () => {
-  const { username } = useParams();
   const navigate = useNavigate();
-
+  const user = localStorage.getItem("user");
+  const parseUserData = JSON.parse(user);
   const [profileData, setProfileData] = useState(null);
-  const [selectedFileName, setSelectedFileName] = useState(null);
   const fileInputRef = useRef(null);
   const [edit, setEdit] = useState(false);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
   const [updatedData, setUpdatedData] = useState({
     email: "",
-    phone: "",
-    profile: {
-      firstName: "",
-      lastName: "",
-      bio: "",
+    username: "",
+    profileDetails: {
       avatar: null,
+      hobbies: [],
+      interests: [],
+      bio: "",
     },
   });
 
   useEffect(() => {
-    if (username) {
+    if (parseUserData.username) {
       const fetchProfileData = async () => {
         try {
-          const response = await axios.get(`/api/user/${username}`);
-          const profile = response.data;
+          const response = await fetchDataFromApi(`/api/user/${parseUserData.username}`);
+          console.log("Response: ", response)
+          const profile = response;
 
           setProfileData(profile);
           setUpdatedData({
             email: profile.email,
-            phone: profile.phone,
-            profile: {
-              firstName: profile.profile.firstName,
-              lastName: profile.profile.lastName,
-              bio: profile.profile.bio,
-              avatar: profile.profile.avatar,
+            username: profile.username,
+            profileDetails: {
+              avatar: profile.profileDetails.avatar || "",
+              hobbies: profile.profileDetails.hobbies || [],
+              interests: profile.profileDetails.interests || [],
+              bio: profile.profileDetails.bio || "",
             },
           });
         } catch (error) {
@@ -61,52 +65,69 @@ const AdminProfilePage = () => {
 
       fetchProfileData();
     }
-  }, [username]);
+  }, [parseUserData.username]);
 
-  const handleEditProfile = () => {
-    setEdit(true);
-  };
-
-  const handleChangePassword = () => {
-    navigate("/user/change-password");
-  };
+  const handleEditProfile = () => setEdit(true);
+  const handleChangePassword = () => navigate("/user/change-password");
+  const handleCancel = () => setEdit(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
-    if (["firstName", "lastName", "bio"].includes(name)) {
-      setUpdatedData((prev) => ({
-        ...prev,
-        profile: {
-          ...prev.profile,
-          [name]: value,
-        },
-      }));
-    } else {
-      setUpdatedData((prev) => ({
-        ...prev,
+    setUpdatedData((prev) => ({
+      ...prev,
+      profileDetails: {
+        ...prev.profileDetails,
         [name]: value,
-      }));
-    }
+      },
+    }));
   };
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setUpdatedData((prev) => ({
         ...prev,
-        profile: {
-          ...prev.profile,
+        profileDetails: {
+          ...prev.profileDetails,
           avatar: e.target.files[0],
         },
       }));
-      setSelectedFileName(e.target.files[0].name);
     }
   };
 
   const handleFileClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
+    if (fileInputRef.current) fileInputRef.current.click();
+  };
+
+  const handleAddToArray = (field) => {
+    setUpdatedData((prev) => ({
+      ...prev,
+      profileDetails: {
+        ...prev.profileDetails,
+        [field]: [...prev.profileDetails[field], ""],
+      },
+    }));
+  };
+
+  const handleArrayChange = (field, index, value) => {
+    setUpdatedData((prev) => ({
+      ...prev,
+      profileDetails: {
+        ...prev.profileDetails,
+        [field]: prev.profileDetails[field].map((item, i) =>
+          i === index ? value : item
+        ),
+      },
+    }));
+  };
+
+  const handleRemoveFromArray = (field, index) => {
+    setUpdatedData((prev) => ({
+      ...prev,
+      profileDetails: {
+        ...prev.profileDetails,
+        [field]: prev.profileDetails[field].filter((_, i) => i !== index),
+      },
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -114,20 +135,18 @@ const AdminProfilePage = () => {
     setUpdating(true);
 
     const formData = new FormData();
-    formData.append("firstName", updatedData.profile.firstName);
-    formData.append("lastName", updatedData.profile.lastName);
     formData.append("email", updatedData.email);
-    formData.append("phone", updatedData.phone);
-    formData.append("bio", updatedData.profile.bio);
+    formData.append("username", updatedData.username);
+    formData.append("bio", updatedData.profileDetails.bio);
+    formData.append("hobbies", JSON.stringify(updatedData.profileDetails.hobbies));
+    formData.append("interests", JSON.stringify(updatedData.profileDetails.interests));
 
-    if (updatedData.profile.avatar instanceof File) {
-      formData.append("avatar", updatedData.profile.avatar);
-    } else if (typeof updatedData.profile.avatar === "string") {
-      formData.append("avatar", updatedData.profile.avatar);
+    if (updatedData.profileDetails.avatar instanceof File) {
+      formData.append("avatar", updatedData.profileDetails.avatar);
     }
 
     try {
-      const response = await axios.patch(`/api/user/${username}`, formData);
+      const response = await axios.patch(`/api/user/${parseUserData.username}`, formData);
 
       if (!response.status === 200) {
         throw new Error("Error updating profile");
@@ -144,10 +163,6 @@ const AdminProfilePage = () => {
     }
   };
 
-  const handleCancel = () => {
-    setEdit(false);
-  };
-
   if (loading) {
     return (
       <Box display="flex" justifyContent="center" mt={4}>
@@ -156,119 +171,37 @@ const AdminProfilePage = () => {
     );
   }
 
-  if (!profileData) {
-    return <Typography>Error loading profile data</Typography>;
-  }
-
   return (
     <Container maxWidth="sm">
       {edit ? (
-        <Paper
-          sx={{
-            p: 3,
-            borderRadius: "0.5rem",
-            border: "1px solid var(--borderCool)",
-            background: "var(--bgLight)",
-          }}
-        >
-          <Typography
-            variant="h5"
-            mb={3}
-            sx={{
-              fontSize: "1rem",
-              fontWeight: "500",
-              color: "var(--textHeading)",
-            }}
-          >
+        <Paper sx={{ p: 3, borderRadius: "0.5rem", border: "1px solid #ccc" }}>
+          <Typography variant="h5" mb={3}>
             Edit Profile
           </Typography>
           <form onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12} textAlign="center">
-                <Box textAlign="center">
-                  <Avatar
-                    src={
-                      updatedData.profile.avatar
-                        ? typeof updatedData.profile.avatar === "string"
-                          ? updatedData.profile.avatar
-                          : URL.createObjectURL(updatedData.profile.avatar)
-                        : undefined
-                    }
-                    alt="avatar"
-                    sx={{ width: 80, height: 80, margin: "0 auto" }}
-                  />
-
-                  <input
-                    type="file"
-                    accept="image/*"
-                    ref={fileInputRef}
-                    onChange={handleFileChange}
-                    style={{ display: "none" }}
-                  />
-
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={handleFileClick}
-                    sx={{ mt: 2 }}
-                  >
-                    Select Profile Photo
-                  </Button>
-
-                  {selectedFileName && (
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      sx={{ mt: 1 }}
-                    >
-                      Selected file: {selectedFileName}
-                    </Typography>
-                  )}
-                </Box>
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="First Name"
-                  name="firstName"
-                  value={updatedData.profile.firstName}
-                  onChange={handleInputChange}
-                  required
+                <Avatar
+                  src={
+                    updatedData.profileDetails.avatar
+                      ? typeof updatedData.profileDetails.avatar === "string"
+                        ? updatedData.profileDetails.avatar
+                        : URL.createObjectURL(updatedData.profileDetails.avatar)
+                      : undefined
+                  }
+                  alt="avatar"
+                  sx={{ width: 80, height: 80, margin: "0 auto" }}
                 />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Last Name"
-                  name="lastName"
-                  value={updatedData.profile.lastName}
-                  onChange={handleInputChange}
-                  required
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  style={{ display: "none" }}
                 />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Email"
-                  name="email"
-                  value={updatedData.email}
-                  onChange={handleInputChange}
-                  required
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Phone"
-                  name="phone"
-                  value={updatedData.phone}
-                  onChange={handleInputChange}
-                  required
-                />
+                <Button variant="outlined" color="primary" onClick={handleFileClick} sx={{ mt: 2 }}>
+                  Select Profile Photo
+                </Button>
               </Grid>
 
               <Grid item xs={12}>
@@ -276,30 +209,46 @@ const AdminProfilePage = () => {
                   fullWidth
                   label="Bio"
                   name="bio"
-                  value={updatedData.profile.bio}
+                  value={updatedData.profileDetails.bio}
                   onChange={handleInputChange}
+                  multiline
                 />
               </Grid>
 
+              {["hobbies", "interests"].map((field) => (
+                <Grid item xs={12} key={field}>
+                  <Typography>{field.charAt(0).toUpperCase() + field.slice(1)}:</Typography>
+                  {updatedData.profileDetails[field].map((item, index) => (
+                    <Box display="flex" alignItems="center" mb={1} key={index}>
+                      <TextField
+                        value={item}
+                        onChange={(e) => handleArrayChange(field, index, e.target.value)}
+                        fullWidth
+                        size="small"
+                      />
+                      <IconButton onClick={() => handleRemoveFromArray(field, index)}>
+                        <Delete />
+                      </IconButton>
+                    </Box>
+                  ))}
+                  <Button
+                    startIcon={<Add />}
+                    onClick={() => handleAddToArray(field)}
+                    sx={{ mt: 1 }}
+                  >
+                    Add {field.slice(0, -1)}
+                  </Button>
+                </Grid>
+              ))}
+
               <Grid item xs={12}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                  disabled={updating}
-                >
+                <Button type="submit" variant="contained" color="primary" fullWidth disabled={updating}>
                   {updating ? "Saving..." : "Save Changes"}
                 </Button>
               </Grid>
 
               <Grid item xs={12}>
-                <Button
-                  onClick={handleCancel}
-                  variant="outlined"
-                  color="secondary"
-                  fullWidth
-                >
+                <Button onClick={handleCancel} variant="outlined" color="secondary" fullWidth>
                   Cancel
                 </Button>
               </Grid>
@@ -307,45 +256,33 @@ const AdminProfilePage = () => {
           </form>
         </Paper>
       ) : (
-        <Paper
-          sx={{
-            p: 3,
-            borderRadius: "0.5rem",
-            border: "1px solid var(--borderCool)",
-            background: "var(--bgLight)",
-          }}
-        >
+        <Paper sx={{ p: 3, borderRadius: "0.5rem", border: "1px solid #ccc" }}>
           <Box display="flex" alignItems="center" mb={3}>
             <Avatar
               src={
-                typeof profileData.profile.avatar === "string"
-                  ? profileData.profile.avatar
+                typeof profileData?.profileDetails?.avatar === "string"
+                  ? profileData?.profileDetails?.avatar
                   : undefined
               }
               alt="avatar"
-              sx={{
-                width: 80,
-                height: 80,
-                mr: 2,
-                border: "1px solid var(--borderCool)",
-              }}
+              sx={{ width: 80, height: 80, mr: 2 }}
             />
             <Box>
-              <Typography variant="h6">
-                {profileData.profile.firstName} {profileData.profile.lastName}
-              </Typography>
+              <Typography variant="h6">{profileData?.username}</Typography>
               <Typography variant="body1" color="textSecondary">
-                {profileData.profile.bio}
+                {profileData?.profileDetails?.bio || "No bio available"}
               </Typography>
             </Box>
           </Box>
 
           <Typography variant="body1">
-            <strong>Email:</strong> {profileData.email}
+            <strong>Email:</strong> {profileData?.email}
           </Typography>
           <Typography variant="body1">
-            <strong>Phone:</strong>{" "}
-            {profileData.phone ? profileData.phone : "N/A"}
+            <strong>Hobbies:</strong> {profileData?.profileDetails?.hobbies.join(", ") || "N/A"}
+          </Typography>
+          <Typography variant="body1">
+            <strong>Interests:</strong> {profileData?.profileDetails?.interests.join(", ") || "N/A"}
           </Typography>
 
           <Button

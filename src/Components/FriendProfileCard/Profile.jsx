@@ -20,7 +20,7 @@ const FriendProfile = () => {
     const [mutualConnections, setMutualConnections] = useState(null);
     const [loading, setLoading] = useState(true);
     const { showSnackbar } = useSnackbar();
-
+    
     const user = localStorage.getItem("user");
     const parseUserData = user ? JSON.parse(user) : null; // Ensure parseUserData is safely parsed
 

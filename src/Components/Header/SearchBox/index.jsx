@@ -24,11 +24,7 @@ const SearchBox = (props) => {
     setSearchFields("");
     fetchFriends();
   }, []);
-
-  useEffect(() => {
-    console.log("Updated All Friends: ", allFriends);
-  }, [allFriends]);
-
+  
   const fetchFriends = async () => {
     try {
       const data = await fetchDataFromApi(`/api/user`);

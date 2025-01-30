@@ -10,10 +10,8 @@ const FriendProfile = () => {
     const parseUserData = JSON.parse(user);
     return (
         <>
-            <Header />
             <FriendProfileCard />
             {!parseUserData && <GetInTouch />}
-            <Footer />
         </>
     );
 };
