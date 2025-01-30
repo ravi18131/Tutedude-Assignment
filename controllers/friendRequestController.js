@@ -106,8 +106,10 @@ const getAlredySendFriendRequestData = async (req, res) => {
     try {
         // Fetch the friend request data where sender and receiver match
         const friendRequest = await FriendRequest.findOne({
-            sender: sender,
-            receiver: receiver
+            $or: [
+                { receiver: sender, sender: receiver },
+                { receiver: receiver, sender: sender}
+            ]
         });
 
         if (!friendRequest) {
