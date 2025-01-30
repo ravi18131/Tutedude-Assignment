@@ -42,6 +42,9 @@ const Footer = () => {
           <div className="row mt-5 linksWrap">
             <div className="col">
               <h5>FRIENDHIVE</h5>
+                <p>
+                  Let's build your connection!!
+                </p>
               <ul className="socials">
                 <li className="list-inline-item">
                   <Link to="#">

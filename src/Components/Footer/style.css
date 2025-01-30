@@ -4,22 +4,28 @@ footer {
   background: #fff;
   margin-top: 3.5rem;
 }
-
 footer .topInfo {
   border-bottom: 1.5px solid rgba(212, 202, 217, 0.5);
   padding-bottom: 2rem;
 }
-
 footer .topInfo .col {
+  border-right: 1.5px solid var(--borderColor);
+  margin-right: 1rem !important;
+  margin-left: 1rem !important;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-
+footer .topInfo .col:first-child {
+  margin-left: 0 !important;
+}
+footer .topInfo .col:last-child {
+  border-right: 0px;
+  margin-right: 0 !important;
+}
 footer .topInfo .col svg {
   font-size: 26px;
 }
-
 footer .topInfo .col span {
   font-size: 14px;
   font-weight: 600;
@@ -29,46 +35,48 @@ footer .linksWrap h5 {
   font-size: 16px;
   margin-bottom: 20px;
   font-weight: bolder;
-  color: var(--primaryHoverColor);
+  margin-left: 32px;
+  color: var(--primaryHoverColor) !important;
+}
+footer .linksWrap p {
+  font-size: 13px;
 }
 
 footer .linksWrap ul li {
   list-style: none;
   margin-bottom: 10px;
 }
-
 footer .linksWrap ul li a {
   color: #4e556e;
   font-size: 13px;
   text-decoration: none;
 }
-
 footer .linksWrap ul li a:hover {
+  text-decoration: none;
   color: #000;
 }
 
+.socials{
+  margin-left: -10px;
+}
 .socials li a {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
   width: 35px;
   height: 35px;
   border-radius: 50%;
   border: 1px solid rgba(208, 174, 31);
 }
-
 .socials li a svg {
   font-size: 16px;
   color: var(--primaryColor);
 }
-
 .socials li a:hover {
-  background: var(--primaryColor);
+  background: var(--primaryColor) !important;
 }
-
 .socials li a:hover svg {
-  color: #fff;
+  color: #fff !important;
 }
 
 footer .divider {
@@ -78,7 +86,7 @@ footer .divider {
   margin: 2rem 0;
 }
 
-.copyright {
+.copyright{
   margin-bottom: 2rem;
 }
 
@@ -90,11 +98,54 @@ footer .divider {
 
 .copyright a {
   font-weight: 500;
+  text-decoration: none;
   color: var(--textColor);
 }
 
 .copyright a span {
   color: var(--primaryHoverColor);
+}
+
+@media only screen and (min-width: 250px) and (max-width: 992px) {
+  footer {
+    overflow: hidden;
+  }
+  footer .topInfo {
+    display: block !important;
+    white-space: nowrap !important;
+    overflow: scroll !important;
+    overflow-y: hidden !important;
+  }
+  footer .topInfo::-webkit-scrollbar {
+    display: none !important;
+  }
+  footer .topInfo .col {
+    width: 250px !important;
+    max-width: 250px !important;
+    flex: 0 0 250px !important;
+    display: inline-block !important;
+  }
+
+  footer .linksWrap {
+    display: block !important;
+    white-space: nowrap !important;
+    overflow: scroll !important;
+    overflow-y: hidden !important;
+  }
+  footer .linksWrap::-webkit-scrollbar {
+    display: none !important;
+  }
+  footer .linksWrap .col {
+    width: 200px !important;
+    max-width: 200px !important;
+    flex: 0 0 200px !important;
+    display: inline-block !important;
+    vertical-align: top !important;
+  }
+
+  .linksWrap {
+    margin-top: 25px !important;
+  }
 }
 
 @media (max-width: 576px) {
