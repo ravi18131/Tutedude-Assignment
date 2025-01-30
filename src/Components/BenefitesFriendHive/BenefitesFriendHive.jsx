@@ -8,59 +8,55 @@ const WhyFriendHive = () => {
     <>
       <section className="container" style={{ marginTop: 100 }}>
         <Heading
-          name="Why GitNexa"
-          description="Why should you choose GitNexa?"
+          name="Why Choose FriendHive?"
+          description="Discover the core features of FriendHive that help you build meaningful connections."
         />
 
         <div className="why-friendhive">
           <div className="card">
             <div className="icon first-icon">
-              <i className="bx bx-code-alt bx-tada-hover icon-1"></i>
+              <i className="bx bx-user-check bx-tada-hover icon-1"></i>
             </div>
             <div className="content">
-              <h2>Advanced Technology</h2>
+              <h2>Smart Connection Recommendations</h2>
               <p>
-                Leveraging the latest tech stack for cutting-edge,
-                cost-effective solutions.
+                Discover new connections based on shared interests, and mutual friends.
               </p>
             </div>
           </div>
 
           <div className="card">
             <div className="icon second-icon">
-              <i className="bx bx-laptop bx-tada-hover icon-2"></i>
+              <i className="bx bx-chat bx-tada-hover icon-2"></i>
             </div>
             <div className="content">
-              <h2>Risk-Free Trial</h2>
+              <h2>Real-Time Communication</h2>
               <p>
-                Experience our solutions with a 1-month free trial before making
-                a commitment.
+                Engage in communication with friends to stay connected.
               </p>
             </div>
           </div>
 
           <div className="card">
             <div className="icon third-icon">
-              <i className="bx bx-shape-circle bx-tada-hover icon-3"></i>
+              <i className="bx bx-user bx-tada-hover icon-3"></i>
             </div>
             <div className="content">
-              <h2>Tailored Design</h2>
+              <h2>Customizable Profiles</h2>
               <p>
-                Professional, custom designs crafted to reflect your brand's
-                unique identity.
+                Personalize your profile to showcase your personality to connect individuals.
               </p>
             </div>
           </div>
 
           <div className="card">
             <div className="icon forth-icon">
-              <i className="bx bx-check-shield bx-tada-hover icon-4"></i>
+              <i className="bx bx-lock bx-tada-hover icon-4"></i>
             </div>
             <div className="content">
-              <h2>Optimal Performance</h2>
+              <h2>Flexible Privacy Settings</h2>
               <p>
-                Ensuring swift performance and robust security for a top-notch
-                user experience.
+                Manage your privacy by controlling what information.
               </p>
             </div>
           </div>

@@ -95,9 +95,6 @@ header .part3 .circle svg {
 .logoWrapper .nav-logo img {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
-  border: 1px solid var(--borderColor);
-  background: rgba(0, 0, 0, 0.8);
 }
 
 .logoWrapper .nav-logo small {

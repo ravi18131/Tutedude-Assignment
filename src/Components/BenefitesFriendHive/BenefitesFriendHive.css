@@ -38,22 +38,22 @@
 }
 
 .why-friendhive .card:nth-child(1) {
-  background: linear-gradient(to bottom, #53a2ff, #53a2ff);
+  background: linear-gradient(to bottom, #2a63a8, #4281cc);
   box-shadow: 0 5px 0 var(--bgBody), inset 0 -5px 0 rgba(255, 255, 255, 0.3),
     0 15px 0 rgba(83, 162, 255, 0.7);
 }
 .why-friendhive .card:nth-child(2) {
-  background: linear-gradient(to bottom, #4281cc, #4281cc);
+  background: linear-gradient(to bottom, #1859a4, #3980d2);
   box-shadow: 0 5px 0 var(--bgBody), inset 0 -5px 0 rgba(255, 255, 255, 0.3),
     0 15px 0 rgba(66, 129, 204, 0.7);
 }
 .why-friendhive .card:nth-child(3) {
-  background: linear-gradient(to bottom, #316099, #316099);
+  background: linear-gradient(to bottom, #1d5191, #3d7dcb);
   box-shadow: 0 5px 0 var(--bgBody), inset 0 -5px 0 rgba(255, 255, 255, 0.3),
     0 15px 0 rgba(49, 96, 153, 0.7);
 }
 .why-friendhive .card:nth-child(4) {
-  background: linear-gradient(to bottom, #204065, #204065);
+  background: linear-gradient(to bottom, #133c6b, #2175d5);
   box-shadow: 0 5px 0 var(--bgBody), inset 0 -5.5px 0 rgba(255, 255, 255, 0.3),
     0 15px 0 rgba(32, 64, 101, 0.7);
 }
@@ -85,6 +85,7 @@
 .why-friendhive .icon.forth-icon {
   box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2), inset 0 -8px 0 #070f18;
 }
+
 
 .why-friendhive .icon::before {
   content: "";
@@ -130,6 +131,7 @@
 .why-friendhive .icon i.icon-4 {
   color: #070f18;
 }
+
 
 .why-friendhive .content {
   position: absolute;

@@ -171,11 +171,6 @@ const SignIn = () => {
               src={Logo}
               width={70}
               height={70}
-              style={{
-                background: "rgba(0, 0, 0, 0.8)",
-                borderRadius: "50%",
-                border: "1px solid var(--borderColor)",
-              }}
             />
           </Box>
 

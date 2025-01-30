@@ -8,18 +8,18 @@ const GetInTouch = () => {
     <section className="container">
       <div className="get-in-touch">
         <Heading
-          name="Get in touch"
-          description="Book a free consultancy right now."
+          name="Join FriendHive"
+          description="Sign up now and start connecting with like-minded people."
         />
 
         <div className="content">
           <p>
-            Ready to <span>transform your vision</span> into reality?
+            Ready to <span>expand your social circle</span> and make meaningful connections?
             <br />
-            Let’s get started on your project!
+            Join FriendHive and connect with friends who share your interests!
           </p>
-          <Link to="/free-quote" className="cta-button">
-            Schedule Free Consultation
+          <Link to="/signup" className="cta-button">
+            Join Now
           </Link>
         </div>
       </div>
