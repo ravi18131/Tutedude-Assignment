@@ -143,6 +143,14 @@ const Header = () => {
                               My Account
                             </MenuItem>
                           </Link>
+                          <Link to="/friends">
+                            <MenuItem onClick={handleClose}>
+                              <ListItemIcon>
+                                <FaHeart fontSize="small" />
+                              </ListItemIcon>
+                              Friends List
+                            </MenuItem>
+                          </Link>
                           <Link to="/friend-requests">
                             <MenuItem onClick={handleClose}>
                               <ListItemIcon>

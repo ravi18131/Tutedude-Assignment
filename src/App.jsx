@@ -18,6 +18,7 @@ import ForgotPasswordConfirm from "./Pages/Auth/ConfirmForgotPassword/index";
 import MyAccount from "./Pages/MyAccount";
 import FriendProfile from "./Pages/FriendProfile/index";
 import FriendRequests from "./Pages/FriendRequest/index";
+import FriendsList from "./Pages/FriendsList/index"
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
           {/* user */}
           <Route path="/" exact={true} element={<Home />} />
           <Route path="/friend-requests" exact={true} element={<FriendRequests />} />
+          <Route path="/friends" exact={true} element={<FriendsList />} />
         </Routes>
       </BrowserRouter>
     </SnackbarProvider>
