@@ -1,0 +1,156 @@
+.why-friendhive {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.why-friendhive .card {
+  position: relative;
+  width: 230px;
+  height: 300px;
+  margin: 20px 10px;
+  background: linear-gradient(to bottom, #274f84c7, #274f84c7);
+  border-radius: 20px;
+  border-bottom-left-radius: 160px;
+  border-bottom-right-radius: 160px;
+  box-shadow: 0 5px 0 var(--bgBody), inset 0 -5px 0 rgba(255, 255, 255, 0.3),
+    0 15px 0 rgba(39, 80, 132, 0.7);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  border: none;
+}
+
+.why-friendhive .card::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  left: -40%;
+  width: 100%;
+  height: 120%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2));
+  transform: rotate(35deg);
+  pointer-events: none;
+  filter: blur(5px);
+}
+
+.why-friendhive .card:nth-child(1) {
+  background: linear-gradient(to bottom, #53a2ff, #53a2ff);
+  box-shadow: 0 5px 0 var(--bgBody), inset 0 -5px 0 rgba(255, 255, 255, 0.3),
+    0 15px 0 rgba(83, 162, 255, 0.7);
+}
+.why-friendhive .card:nth-child(2) {
+  background: linear-gradient(to bottom, #4281cc, #4281cc);
+  box-shadow: 0 5px 0 var(--bgBody), inset 0 -5px 0 rgba(255, 255, 255, 0.3),
+    0 15px 0 rgba(66, 129, 204, 0.7);
+}
+.why-friendhive .card:nth-child(3) {
+  background: linear-gradient(to bottom, #316099, #316099);
+  box-shadow: 0 5px 0 var(--bgBody), inset 0 -5px 0 rgba(255, 255, 255, 0.3),
+    0 15px 0 rgba(49, 96, 153, 0.7);
+}
+.why-friendhive .card:nth-child(4) {
+  background: linear-gradient(to bottom, #204065, #204065);
+  box-shadow: 0 5px 0 var(--bgBody), inset 0 -5.5px 0 rgba(255, 255, 255, 0.3),
+    0 15px 0 rgba(32, 64, 101, 0.7);
+}
+
+.why-friendhive .icon {
+  position: relative;
+  margin-top: -200px;
+  margin-left: 65px;
+  width: 100px;
+  height: 100px;
+  background: var(--bgBody);
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2), inset 0 -8px 0 #275084;
+  display: flex;
+  z-index: 10;
+  justify-content: center;
+}
+
+.why-friendhive .icon.first-icon {
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2), inset 0 -8px 0 #3a71b2;
+}
+.why-friendhive .icon.second-icon {
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2), inset 0 -8px 0 #29507f;
+}
+.why-friendhive .icon.third-icon {
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2), inset 0 -8px 0 #18304c;
+}
+.why-friendhive .icon.forth-icon {
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2), inset 0 -8px 0 #070f18;
+}
+
+.why-friendhive .icon::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50px;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border-top-right-radius: 32px;
+  box-shadow: 15px -15px 0 15px var(--bgBody);
+}
+
+.why-friendhive .icon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -50px;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border-top-left-radius: 32px;
+  box-shadow: -15px -15px 0 15px var(--bgBody);
+}
+
+.why-friendhive .icon i {
+  color: var(--primaryHoverColor);
+  position: relative;
+  font-size: 4.5rem;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.why-friendhive .icon i.icon-1 {
+  color: #3a71b2;
+}
+.why-friendhive .icon i.icon-2 {
+  color: #29507f;
+}
+.why-friendhive .icon i.icon-3 {
+  color: #18304c;
+}
+.why-friendhive .icon i.icon-4 {
+  color: #070f18;
+}
+
+.why-friendhive .content {
+  position: absolute;
+  width: 100%;
+  padding: 16px;
+  padding-top: 120px;
+  text-align: center;
+}
+
+.why-friendhive .content h2 {
+  font-size: 1.1rem;
+  color: white;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.why-friendhive .content p {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5rem;
+}

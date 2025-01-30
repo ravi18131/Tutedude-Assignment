@@ -1,0 +1,177 @@
+.hero-section {
+  padding: 0 1rem;
+  margin-top: 100px;
+  width: 100%;
+}
+
+/* _____ Left Section _____ */
+
+.hero-section .left-section {
+  margin-top: 4rem;
+}
+
+.hero-section .big-chip {
+  color: var(--primaryColor);
+  font-weight: 500;
+  border: 1.5px solid rgba(39, 80, 132, 0.5);
+  padding: 1rem 0.5rem;
+}
+
+.hero-section .small-chip {
+  color: var(--primaryColor);
+  font-weight: 400;
+  border: 1px solid rgba(39, 80, 132, 0.5);
+  padding: 0.5rem 0.25rem;
+  font-size: 12px;
+}
+
+h1.git-nexa {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--textHeading);
+  margin-bottom: 1.5rem;
+  width: 90%;
+}
+
+.hero-section .hero-section-para {
+  font-size: 1rem;
+  color: var(--textLight);
+  margin-bottom: 1.5rem;
+  width: 90%;
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.75rem;
+  font-weight: 400;
+}
+
+.hero-section .hero-section-btn {
+  text-transform: none;
+  display: inline-block;
+  padding: 12px 20px;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: white;
+  text-align: start;
+  border-radius: 6px;
+  display: inline-block;
+  white-space: nowrap;
+  font-weight: 500;
+  background: var(--primaryColor);
+  transition: all 0.35s ease;
+}
+
+.hero-section .hero-section-btn:hover {
+  background: var(--primaryHoverColor);
+}
+
+/* _____ Right Section _____ */
+
+.hero-section .right-section {
+  position: relative;
+}
+
+.hero-section .bg-color {
+  position: absolute;
+  width: 300px;
+  height: 150px;
+  background: #17ccfe;
+  left: 40%;
+  top: 300px;
+  z-index: -1;
+  border-radius: 16px;
+  filter: blur(200px);
+}
+
+.hero-section .bg-graphic {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  background: #53a3ff51;
+  left: 53.35%;
+  top: 90px;
+  z-index: -1;
+  border-radius: 50%;
+}
+
+/* Media Query */
+
+@media (max-width: 1920px) {
+  .hero-section .bg-color {
+    left: 35%;
+  }
+
+  .hero-section .bg-graphic {
+    left: 54%;
+  }
+}
+
+@media (max-width: 1500px) {
+  .hero-section .bg-graphic {
+    left: 55%;
+  }
+}
+
+@media (max-width: 1400px) {
+  .hero-section .left-section {
+    margin-top: 2rem;
+  }
+
+  .hero-section .bg-graphic {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .hero-section .left-section {
+    margin-top: 0;
+  }
+
+  .hero-section .bg-color {
+    left: 30%;
+  }
+
+  .hero-section .bg-graphic {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 992px) {
+  h1.git-nexa {
+    width: 100%;
+  }
+
+  .hero-section .hero-section-para {
+    width: 100%;
+  }
+
+  .hero-section .right-section {
+    margin-bottom: 1rem;
+  }
+
+  .hero-section .bg-color {
+    left: 0;
+    width: 100%;
+    background: #17ccfea0;
+  }
+
+  .hero-section .bg-graphic {
+    width: 50vw;
+    height: 50vw;
+    left: 25%;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-section .right-section img {
+    width: 100vw;
+    object-fit: cover;
+  }
+
+  .hero-section .bg-graphic {
+    width: 60vw;
+    height: 60vw;
+    left: 20%;
+  }
+}

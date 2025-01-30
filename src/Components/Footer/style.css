@@ -66,7 +66,7 @@ footer .linksWrap ul li a:hover {
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  border: 1px solid rgba(208, 174, 31);
+  border: 1px solid var(--primaryColor);
 }
 .socials li a svg {
   font-size: 16px;
@@ -87,23 +87,14 @@ footer .divider {
 }
 
 .copyright{
-  margin-bottom: 2rem;
+  background: #191c24;
+  padding: 0.5rem;
 }
 
 .copyright p {
   text-align: center;
   font-weight: 500;
-  color: var(--textLight);
-}
-
-.copyright a {
-  font-weight: 500;
-  text-decoration: none;
-  color: var(--textColor);
-}
-
-.copyright a span {
-  color: var(--primaryHoverColor);
+  color: #ffff;
 }
 
 @media only screen and (min-width: 250px) and (max-width: 992px) {

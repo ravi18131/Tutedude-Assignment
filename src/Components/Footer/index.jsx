@@ -35,7 +35,7 @@ const Footer = () => {
 
             <div className="col">
               <span>🔐</span>
-              <span className="ml-2">Secure Login & Authentication</span>
+              <span className="ml-2">Secure Authentication</span>
             </div>
           </div>
 
@@ -109,18 +109,11 @@ const Footer = () => {
 
 
 
-          <hr className="divider" />
+          {/* <hr className="divider" /> */}
 
           <div className="copyright">
             <p>
-              Copyright 2024. All rights reserved |{" "}
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Developed & Designed by <span>Ravi Kumar</span>
-              </a>
+            Copyright 2025 © FriendHive - All Right Reserved
             </p>
           </div>
         </div>

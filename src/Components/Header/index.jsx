@@ -177,24 +177,10 @@ const Header = () => {
                               fontWeight: "600",
                               textTransform: "uppercase",
                               textDecoration: "none",
-                              fontSize: "14px",
+                              fontSize: "15px",
                             }}
                           >
                             Login
-                          </Link>
-                        </li>
-                        <li className="list-inline-item pl-3">
-                          <Link
-                            to="/signUp"
-                            style={{
-                              color: "var(--textColor)",
-                              fontWeight: "600",
-                              textTransform: "uppercase",
-                              fontSize: "14px",
-                              textDecoration: "none",
-                            }}
-                          >
-                            SignUp
                           </Link>
                         </li>
                       </div>

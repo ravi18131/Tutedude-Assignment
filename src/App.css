@@ -4,25 +4,44 @@
 
 /* __________ CSS VARIABLES  __________ */
 :root {
-  /* _____ Action _____ */
-  --primaryColor: #d0ae1f;
-  --primaryHoverColor: #9d8317;
-  --secondaryColor: #ffd301;
+  /* _____ Colors _____ */
+  --primaryColor: #275084;
+  --primaryHoverColor: #173151;
+  --secondaryColor: #53a2ff;
+  --secondaryColorLight: rgb(198, 237, 255);
 
-  /* _____ Text _____ */
   --textColor: #2f2d47;
+  --textMedium: #656e81;
   --textLight: #67667c;
+  --textHeading: #465b7d;
 
-  /* _____ BG _____ */
   --bgBody: #fafcff;
   --bgColor: #f4f4fc;
   --bgLight: #fdf9ff;
-  --dashboardActiveLinkBg: rgba(157, 131, 23, 0.15);
+  --dashboardActiveLinkBg: rgba(83, 162, 255, 0.2);
 
-  /* _____ Border _____ */
   --borderColor: #d4cad9;
   --borderLight: #dfd8e3;
   --borderCool: #ced4da;
+  /* _____ Action _____ */
+  /* --primaryColor: #d0ae1f;
+  --primaryHoverColor: #9d8317;
+  --secondaryColor: #ffd301; */
+
+  /* _____ Text _____ */
+  /* --textColor: #2f2d47;
+  --textLight: #67667c; */
+
+  /* _____ BG _____ */
+  /* --bgBody: #fafcff;
+  --bgColor: #f4f4fc;
+  --bgLight: #fdf9ff;
+  --dashboardActiveLinkBg: rgba(157, 131, 23, 0.15); */
+
+  /* _____ Border _____ */
+  /* --borderColor: #d4cad9;
+  --borderLight: #dfd8e3;
+  --borderCool: #ced4da; */
 
   /* _____ Shadow _____ */
   --shadow: 0px 23px 21px -8px rgba(136, 160, 255, 0.15);
@@ -67,6 +86,10 @@ body {
   right: 20px !important;
   left: inherit !important;
   z-index: 100000000 !important;
+}
+
+a {
+  text-decoration: none;
 }
 
 a:hover {
