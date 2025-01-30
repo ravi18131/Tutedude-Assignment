@@ -1,0 +1,13 @@
+.homeBannerSection {
+  position: relative;
+}
+.homeBannerSection {
+  cursor: pointer;
+}
+.homeBannerSection .swiper .item {
+  overflow: hidden;
+  border-radius: 10px;
+}
+.homeBannerSection * {
+  outline: none !important;
+}

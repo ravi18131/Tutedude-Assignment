@@ -1,0 +1,57 @@
+/* Container for the email verification page */
+.email-container {
+    background-color: #f2f2fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* The actual content inside the email container */
+.email-content {
+    max-width: 800px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Main title */
+.main-title {
+    font-size: 48px;
+    line-height: 60px;
+    font-weight: 600;
+    font-family: 'Inknut Antiqua', serif;
+    color: #2c4964;
+    margin-bottom: 2rem;
+}
+
+/* Success message */
+.success-message {
+    font-size: 36px;
+    line-height: 60px;
+    font-weight: 600;
+    color: #028976;
+    margin: 0;
+}
+
+/* Information text */
+.info-text {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 24px;
+    color: #2c4964;
+    margin-top: 20px;
+}
+
+/* Description text */
+.description-text {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #58567c;
+    margin-top: 10px;
+}

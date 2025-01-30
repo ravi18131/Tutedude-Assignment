@@ -1,0 +1,230 @@
+.headerSearch {
+  width: 90%;
+  height: 50px;
+  background: #e7e7e7;
+  padding: 5px;
+  position: relative;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.headerSearch input {
+  background: transparent !important;
+  outline: none !important;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 37px;
+  border: 0px !important;
+  padding: 0px 20px !important;
+}
+
+.headerSearch input::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.headerSearch button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  z-index: 100;
+  min-width: 40px !important;
+  height: 40px !important;
+  width: 40px !important;
+  border-radius: 50% !important;
+  color: #000;
+}
+
+.headerSearch button svg,
+header .part3 .circle svg {
+  font-size: 25px;
+  opacity: 0.8;
+  color: #000 !important;
+}
+
+.headerSearch button .MuiCircularProgress-root {
+  width: 25px !important;
+  height: 25px !important;
+}
+
+.headerWrapperFixed {
+  background: #fff;
+  transition: all 0.3s ease-in-out;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 10000;
+}
+
+.headerWrapperFixed+div {
+  margin-top: 120px !important;
+}
+
+.headerWrapper .header {
+  width: 100%;
+  height: auto;
+  padding: 25px 0px;
+}
+
+.headerWrapper {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.headerSearchWrapper {
+  width: 80%;
+}
+
+.logoWrapper .nav-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  color: var(--primaryColor);
+  transition: color 0.3s;
+  font-family: "Varela Round", sans-serif;
+  text-decoration: none;
+  font-style: normal;
+}
+
+.logoWrapper .nav-logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--borderColor);
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.logoWrapper .nav-logo small {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--textColor);
+}
+
+.closeSearch {
+  display: none;
+}
+
+header .part3 .circle {
+  align-items: center;
+  justify-content: center;
+  min-width: 45px !important;
+  height: 45px !important;
+  width: 45px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #000;
+  background: #ededed;
+}
+
+header .part3 .circle svg {
+  font-size: 22px;
+}
+
+.headerWrapper .header .part3 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  flex-grow: 1;
+}
+
+#accDrop {
+  z-index: 10000 !important;
+}
+
+#accDrop ul a {
+  color: #000;
+}
+
+#accDrop ul li {
+  font-size: 16px !important;
+  padding: 7px 15px !important;
+}
+
+#accDrop ul li svg {
+  font-size: 15px !important;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .headerSearchWrapper {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 280px) and (max-width: 992px) {
+  .headerWrapper .header {
+    padding: 10px 0px;
+  }
+
+  .headerWrapper .header .logoWrapper {
+    width: 30% !important;
+    padding-right: 0px !important;
+  }
+
+  .headerWrapper .header .part2 {
+    width: 70% !important;
+  }
+
+  .headerWrapperFixed+div {
+    margin-top: 80px !important;
+  }
+
+  /* For mobile drawer */
+  .headerWrapper .header .part3 {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    flex-grow: 1; /* Allow this part to take remaining space */
+  }
+
+  .headerSearchWrapper {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100% !important;
+    height: 100vh;
+    background: #fff;
+    z-index: 1000;
+    padding: 15px !important;
+    margin: 0px !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+  }
+
+  .headerSearchWrapper.open {
+    opacity: 1;
+    visibility: inherit;
+  }
+
+  .headerSearchWrapper .headerSearch {
+    width: 100% !important;
+    pad: 0px !important;
+    margin: 0px !important;
+  }
+
+  .closeSearch {
+    display: block;
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 280px) and (max-width: 768px) {
+  header .part3 .circle {
+    min-width: 35px !important;
+    width: 35px !important;
+    height: 35px !important;
+    margin-right: 8px !important;
+  }
+
+  #accDrop ul li {
+    padding: 5px 12px !important;
+    font-size: 14px !important;
+  }
+}
