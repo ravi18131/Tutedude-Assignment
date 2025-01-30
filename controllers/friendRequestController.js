@@ -3,37 +3,58 @@ const User = require("../models/User");
 
 // Retrieve all friend requests (optional filters for status, sender, receiver)
 const getFriendRequests = async (req, res) => {
-    const { status, sender, receiver, limit = 5, offset = 0 } = req.query;
-
     try {
-        const query = {};
+        // Get the receiver username from params
+        const { username } = req.params;
 
-        // Add optional filters
-        if (status) query.status = status;
-        if (sender) query.sender = sender;
-        if (receiver) query.receiver = receiver;
+        // Fetch all pending friend requests for the receiver
+        const friendRequests = await FriendRequest.find({
+            receiver: username,
+            status: "Pending",
+        });
 
-        const friendRequests = await FriendRequest.find(query)
-            .limit(parseInt(limit))
-            .skip(parseInt(offset))
-            .populate('sender receiver'); // Populate sender and receiver details
+        // If no friend requests found, return an empty array
+        if (!friendRequests || friendRequests.length === 0) {
+            return res.status(200).json({ success: true, data: [] });
+        }
 
-        return res.status(200).json({ success: true, data: friendRequests });
+        // Fetch the sender data for each friend request
+        const senderIds = friendRequests.map((request) => request.sender); // Assuming sender is stored as an ID
+
+        // Get user details for the senders
+        const senders = await User.find({ username: { $in: senderIds } });
+
+        // Map the friend requests to include sender details
+        const response = friendRequests.map((request) => {
+            const sender = senders.find((user) => user.username === request.sender);
+            return {
+                id: request._id, // ID of the friend request
+                sender: {
+                    username: sender.username,
+                    email: sender.email,
+                    profileDetails: sender.profileDetails, // Include other user details like avatar, bio, etc.
+                },
+                status: request.status,
+                createdAt: request.createdAt,
+            };
+        });
+
+        // Return the data
+        return res.status(200).json({ success: true, data: response });
     } catch (error) {
-        console.error(error);
+        console.error("Error fetching friend requests:", error);
         return res.status(400).json({ success: false, message: "Bad Request" });
     }
 };
 
-// Retrieve a single friend request by ID
+
+// Retrieve all 
 const getAlredySendFriendRequestData = async (req, res) => {
     const { sender, receiver } = req.query; // Get sender and receiver from the query parameters
 
     if (!sender || !receiver) {
         return res.status(400).json({ message: 'Sender and receiver are required' });
     }
-
-    console.log(req.query);
 
     try {
         // Fetch the friend request data where sender and receiver match
@@ -46,7 +67,6 @@ const getAlredySendFriendRequestData = async (req, res) => {
             return res.status(404).json({ message: 'Friend request not found' });
         }
 
-        console.log("friendRequest", friendRequest)
         // If request found, return the data
         return res.status(200).json(friendRequest);
     } catch (error) {
@@ -130,7 +150,6 @@ const getMutualConnections = async (req, res) => {
         res.status(500).json({ message: "Internal server error." });
     }
 };
-
 
 // Send a friend request (Create a new friend request)
 const sendFriendRequest = async (req, res) => {

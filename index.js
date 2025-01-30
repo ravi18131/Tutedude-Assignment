@@ -96,12 +96,14 @@ const authRouter = require("./routes/authRoute.js")
 const userRoutes = require("./routes/userRoutes")
 const friendRequestRoutes = require("./routes/friendRequestRoutes.js")
 const searchRoutes = require("./routes/searchRoute.js");
+const recommendationRoute = require("./routes/recommendationRoute.js");
 
 //Routes
 app.use("/auth", authRouter);
 app.use("/api/user", userRoutes);
 app.use("/api/friend-requests", friendRequestRoutes);
 app.use(`/api/search`, searchRoutes);
+app.use(`/api/recommendations`, recommendationRoute);
 
 //Database
 mongoose
