@@ -9,8 +9,11 @@ router.post('/signup', userController.signUp);
 // User Login
 router.post('/signin', userController.login);
 
+// User Login
+router.get('/', userController.getAllUsers);
+
 // Get User Profile (protected route)
-router.get('/profile', authMiddleware, userController.getUserProfile);
+router.get('/:username', userController.getUserProfile);
 
 // Update User Profile (protected route)
 router.put('/profile', authMiddleware, userController.updateUserProfile);
