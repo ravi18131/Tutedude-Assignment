@@ -82,7 +82,7 @@ const Footer = () => {
                   <Link to="#">FAQ</Link>
                 </li>
                 <li>
-                  <Link to="#">Contact Us</Link>
+                  <Link to="/contact-us">Contact Us</Link>
                 </li>
               </ul>
             </div>
@@ -91,10 +91,10 @@ const Footer = () => {
               <h5>LEGAL</h5>
               <ul>
                 <li>
-                  <Link to="#">Privacy Policy</Link>
+                  <Link to="/privacy-policy">Privacy Policy</Link>
                 </li>
                 <li>
-                  <Link to="#">Terms and Conditions</Link>
+                  <Link to="/terms-and-condition">Terms and Conditions</Link>
                 </li>
               </ul>
             </div>

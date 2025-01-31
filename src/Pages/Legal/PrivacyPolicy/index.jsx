@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useState } from "react";
 import {
     Box,
@@ -7,20 +6,106 @@ import {
     Link,
     CircularProgress,
 } from "@mui/material";
-import { fetchDataFromApi } from "../../../utils/api";
+
+const policy = {
+    title: "FriendHive Privacy Policy",
+    version: "1.0",
+    updatedAt: new Date().toISOString(),
+    description: "At FriendHive, we prioritize your privacy and are committed to protecting your personal data. This Privacy Policy outlines how we collect, use, and safeguard your information while using our platform.",
+    sections: [
+        {
+            title: "Information We Collect",
+            description: "We collect the following types of information to provide a better experience on FriendHive:",
+            points: [
+                {
+                    title: "Account Information",
+                    description: "Includes your name, email address, username, and profile details when you register or update your profile."
+                },
+                {
+                    title: "User-Generated Content",
+                    description: "Includes the posts, messages, and comments you share on FriendHive."
+                },
+                {
+                    title: "Usage Data",
+                    description: "We collect information on how you interact with our platform, such as pages visited, features used, and session length."
+                },
+                {
+                    title: "Device Information",
+                    description: "Details like IP address, device type, browser version, and operating system."
+                }
+            ]
+        },
+        {
+            title: "How We Use Your Information",
+            description: "We use your information to improve and provide our services:",
+            points: [
+                {
+                    title: "Personalization",
+                    description: "To recommend friends, content, and communities tailored to your interests."
+                },
+                {
+                    title: "Communication",
+                    description: "To send you important notifications, updates, and promotional materials."
+                },
+                {
+                    title: "Safety and Security",
+                    description: "To protect your account and ensure the safety of our community by monitoring for fraudulent or harmful activities."
+                }
+            ]
+        },
+        {
+            title: "Sharing Your Information",
+            description: "We respect your privacy and share information only when necessary:",
+            points: [
+                {
+                    title: "With Other Users",
+                    description: "Your profile information (e.g., username, bio) is visible to other users."
+                },
+                {
+                    title: "Third-Party Services",
+                    description: "We may share data with trusted third parties, such as analytics providers or payment processors, in compliance with legal and security requirements."
+                },
+                {
+                    title: "Legal Compliance",
+                    description: "When required by law, we may disclose your information to legal authorities."
+                }
+            ]
+        },
+        {
+            title: "Your Rights",
+            description: "You have the following rights regarding your personal data:",
+            points: [
+                {
+                    title: "Access and Correction",
+                    description: "You can view and update your personal data through your account settings."
+                },
+                {
+                    title: "Data Portability",
+                    description: "Request a copy of your data in a portable format."
+                },
+                {
+                    title: "Account Deletion",
+                    description: "Request to permanently delete your account and associated data."
+                }
+            ]
+        },
+        {
+            title: "Data Security",
+            description: "We implement robust measures to protect your data from unauthorized access or misuse. However, no system is completely secure, and we recommend safeguarding your account credentials."
+        },
+        {
+            title: "Changes to This Policy",
+            description: "We may update this Privacy Policy from time to time to reflect changes in our practices. We encourage you to review this page periodically."
+        }
+    ],
+    provider: {
+        name: "FriendHive",
+        website: "https://www.friendhive.com",
+        logo: "/"
+    }
+};
 
 const PrivacyPolicyPage = () => {
-    const [policy, setPolicy] = useState(null); // Initialize to null
-
-    useEffect(() => {
-        const fetchPolicy = async () => {
-            await fetchDataFromApi(`/api/privacy-policy/one`).then((res) => {
-                setPolicy(res);
-            });
-        };
-
-        fetchPolicy();
-    }, []);
 
     if (!policy) {
         return (
@@ -234,33 +319,6 @@ const PrivacyPolicyPage = () => {
                         {policy.provider?.website}
                     </Link>
                 </Typography>
-                {policy.provider?.logo && (
-                    <Box
-                        mt={4}
-                        sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
-                    >
-                        <img
-                            src={policy.provider?.logo}
-                            alt={policy.provider?.name}
-                            style={{
-                                background: "rgba(0, 0, 0, 0.8)", 
-                                borderRadius: "50%"
-                            }}
-                            width="40"
-                        />
-
-                        <Typography
-                            variant="h3"
-                            sx={{
-                                color: "var(--primaryColor)",
-                                fontSize: "1rem",
-                                fontWeight: "bold",
-                            }}
-                        >
-                            Royal Beekeeper, Rajasthan
-                        </Typography>
-                    </Box>
-                )}
             </Box>
         </Box>
     );

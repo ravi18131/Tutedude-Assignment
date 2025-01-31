@@ -29,10 +29,9 @@ const FriendProfile = () => {
         const fetchRecommendations = async () => {
             try {
                 const res = await fetchDataFromApi("/api/recommendations");
-                console.log("Res : ", res);
                 setRecommendations(res);
             } catch (error) {
-                showSnackbar("Failed to fetch recommendations.", "error");
+                // showSnackbar("Failed to fetch recommendations.", "error");
             }
         };
 

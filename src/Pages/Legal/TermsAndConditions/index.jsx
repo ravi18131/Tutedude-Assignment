@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import {
     Typography,
@@ -8,21 +7,63 @@ import {
     Divider,
 } from "@mui/material";
 
-import { fetchDataFromApi } from "../../../utils/api";
+const termsData = {
+    version: "1.0",
+    updatedAt: new Date().toISOString(),
+    description: "These Terms and Conditions govern your use of FriendHive's services. By accessing or using our platform, you agree to comply with these terms. Please read them carefully before using FriendHive.",
+    sections: [
+        {
+            title: "Acceptance of Terms",
+            description: "By creating an account or using FriendHive, you agree to these Terms and Conditions and our Privacy Policy."
+        },
+        {
+            title: "User Responsibilities",
+            description: "You are responsible for your activities on the platform, including the content you share and interactions with other users.",
+            points: [
+                {
+                    title: "Account Security",
+                    description: "Maintain the confidentiality of your login credentials and notify us immediately if you suspect unauthorized use of your account."
+                },
+                {
+                    title: "Prohibited Activities",
+                    description: "Do not engage in unlawful, harmful, or abusive activities, such as harassment, spamming, or sharing inappropriate content."
+                }
+            ]
+        },
+        {
+            title: "Content Ownership and Licensing",
+            description: "You retain ownership of the content you post on FriendHive, but grant us a license to use it as outlined below.",
+            points: [
+                {
+                    title: "User Content",
+                    description: "By posting content, you grant FriendHive a non-exclusive, royalty-free license to display, distribute, and promote your content on the platform."
+                },
+                {
+                    title: "Removal of Content",
+                    description: "We reserve the right to remove or restrict access to content that violates these terms or our community guidelines."
+                }
+            ]
+        },
+        {
+            title: "Termination of Services",
+            description: "We may suspend or terminate your access to FriendHive if you violate these Terms and Conditions or engage in harmful behavior."
+        },
+        {
+            title: "Limitation of Liability",
+            description: "FriendHive is not liable for any damages or losses resulting from your use of the platform, including content shared by other users."
+        },
+        {
+            title: "Changes to Terms",
+            description: "We reserve the right to update these Terms and Conditions at any time. Changes will be effective upon posting to this page."
+        },
+        {
+            title: "Governing Law",
+            description: "These terms are governed by the laws of the jurisdiction where FriendHive operates."
+        }
+    ],
+};
 
 const TermsAndConditionPage = () => {
-    const [termsData, setTermsData] = useState(null); // Change to null instead of TypeScript interface
-
-    useEffect(() => {
-
-        const fetchTermsData = async () => {
-            await fetchDataFromApi(`/api/terms-and-conditions/one`).then((res) => {
-                setTermsData(res);
-            });
-        }
-
-        fetchTermsData();
-    }, []);
 
     if (!termsData) {
         return (

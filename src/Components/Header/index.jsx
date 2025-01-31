@@ -159,14 +159,14 @@ const Header = () => {
                               Friend Requests
                             </MenuItem>
                           </Link>
-                          <Link to="/my-list">
+                          {/* <Link to="/my-list">
                             <MenuItem onClick={handleClose}>
                               <ListItemIcon>
                                 <FaHeart fontSize="small" />
                               </ListItemIcon>
                               Friend Recommendations
                             </MenuItem>
-                          </Link>
+                          </Link> */}
                           <MenuItem onClick={logout}>
                             <ListItemIcon>
                               <RiLogoutCircleRFill fontSize="small" />

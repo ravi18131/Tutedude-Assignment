@@ -22,16 +22,16 @@ import FriendsList from "./Pages/FriendsList/index";
 import ClietLayout from "./layouts/ClientLayout";
 import ChangePassword from "./Components/MyAccount/change-password/index";
 import DisplayData from "./Components/showdata/index"
+import PrivacyPolicyPage from "./Pages/Legal/PrivacyPolicy";
+import TermsAndConditionPage from "./Pages/Legal/TermsAndConditions";
+import ContactUs from "./Pages/ContactUs/ContactUs";
 function App() {
   return (
     <SnackbarProvider>
       <BrowserRouter>
         <Routes>
-
-
           <Route path="/" exact={true} element={<Home />} />
-          {/* <Route path="/" exact={true} element={<DisplayData />} /> */}
-          {/* user */}
+
           <Route path="" element={<ClietLayout></ClietLayout>}>
             {/* AUTH */}
             <Route path="/auth/verified" exact={true} element={<Verified />} />
@@ -46,7 +46,9 @@ function App() {
             <Route path="/friend-requests" exact={true} element={<FriendRequests />} />
             <Route path="/friends" exact={true} element={<FriendsList />} />
             <Route path="/user/change-password" exact={true} element={<ChangePassword />} />
-
+            <Route path="/privacy-policy" exact={true} element={<PrivacyPolicyPage />} />
+            <Route path="/terms-and-condition" exact={true} element={<TermsAndConditionPage />} />
+            <Route path="/contact-us" exact={true} element={<ContactUs />} />
           </Route>
         </Routes>
       </BrowserRouter>
