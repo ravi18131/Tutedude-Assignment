@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const friendRequestController = require('../controllers/friendRequestController');
+const authMiddleware = require('../middleware/auth');
 
-router.get('/check-connection', friendRequestController.getAlredySendFriendRequestData);
+router.get('/check-connection', authMiddleware, friendRequestController.getAlredySendFriendRequestData);
 // Get all friend requests
-router.get('/:username', friendRequestController.getFriendRequests);
-router.get('/friends-list/:username', friendRequestController.getFriendsList);
+router.get('/:username', authMiddleware, friendRequestController.getFriendRequests);
+
+router.get('/friends-list/:username', authMiddleware, friendRequestController.getFriendsList);
 
 
 // Get a single friend request by ID

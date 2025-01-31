@@ -50,45 +50,6 @@ const sendVerificationEmail = async (data) => {
     }
 };
 
-const retailerVerificationEmail = async ({ data, password }) => {
-    const uniqueString = uuidv4() + data._id;
-    const uniqueStringHashed = await bcrypt.hashSync(uniqueString, 12);
-    const url = `${baseServerUrl}/auth/verify/${data._id}/${uniqueString}`;
-
-    const expiresDate = moment().add(6, 'hours').toDate();
-
-    try {
-        const verificationData = await UserVerification.create({
-            userId: data._id,
-            expiresAt: expiresDate,
-            uniqueString: uniqueStringHashed
-        });
-
-        if (verificationData) {
-            // Use absolute path for verify.html
-            const pathName = path.join(__dirname, '..', 'template', 'retailerverification.html');
-            // const pathName = ""
-
-            const obj = { link: url, password };
-            const subject = "Retailer Email Verification";
-            const toMail = data.email;
-
-            try {
-                const sendMail = await EmailTransporter({ pathName, replacementObj: obj, toMail, subject });
-                if (sendMail) {
-                    return { message: 'Email sent successfully', status: 200 };
-                }
-            } catch (err) {
-                console.error('Error sending email:', err);
-                return { error: 'Unable to send Email !!!', status: 400 };
-            }
-        }
-    } catch (err) {
-        console.error("Error creating Retailer Verification document:", err);
-        return { error: 'Unable to create Retailer verification record', status: 400 };
-    }
-};
-
 const verifyEmail = async (req, res) => {
     const { userId, uniqueString } = req.params;
 
@@ -272,4 +233,4 @@ const forgotPasswordConfirm = async (req, res) => {
 };
 
 
-module.exports = { sendVerificationEmail, retailerVerificationEmail, forgotPasswordEmail, verifyEmail, forgotPassword, forgotPasswordConfirm };
+module.exports = { sendVerificationEmail, forgotPasswordEmail, verifyEmail, forgotPassword, forgotPasswordConfirm };
