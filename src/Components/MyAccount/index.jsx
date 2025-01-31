@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchDataFromApi } from "../../utils/api";
+import { useSnackbar } from "../../context/SnackbarProvider";
 import axios from "axios";
 import {
   Box,
@@ -16,6 +17,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { Add, Delete } from "@mui/icons-material";
+const BaseUrl = process.env.REACT_APP_API_URL;
 
 const AdminProfilePage = () => {
   const navigate = useNavigate();
@@ -36,13 +38,12 @@ const AdminProfilePage = () => {
       bio: "",
     },
   });
-
+  const { showSnackbar } = useSnackbar();
   useEffect(() => {
     if (parseUserData.username) {
       const fetchProfileData = async () => {
         try {
           const response = await fetchDataFromApi(`/api/user/${parseUserData.username}`);
-          console.log("Response: ", response)
           const profile = response;
 
           setProfileData(profile);
@@ -146,18 +147,18 @@ const AdminProfilePage = () => {
     }
 
     try {
-      const response = await axios.patch(`/api/user/${parseUserData.username}`, formData);
-
-      if (!response.status === 200) {
-        throw new Error("Error updating profile");
+      const response = await axios.patch(`${BaseUrl}/api/user/${parseUserData.username}`, formData);
+      if (response.success !== false) {
+        showSnackbar("Profile updated successfully!", "success", "#aadbaa");
+        setProfileData(response.data.data);
+        setEdit(false);
+      } else {
+        const msg = response.message || "Internal server error!!";
+        showSnackbar(msg, "error", "#f1b9b9");
       }
-
-      alert("Profile updated successfully!");
-      setProfileData(response.data);
-      setEdit(false);
     } catch (error) {
-      console.error("Error updating profile!", error);
-      alert("Error updating profile!");
+      const msg = error.message || "Internal server error!!";
+      showSnackbar(msg, "error", "#f1b9b9");
     } finally {
       setUpdating(false);
     }

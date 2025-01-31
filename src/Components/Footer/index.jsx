@@ -1,10 +1,4 @@
 import { Link } from "react-router-dom";
-
-import { GiHoneyJar } from "react-icons/gi";
-import { CiDeliveryTruck } from "react-icons/ci";
-import { CiDiscount1 } from "react-icons/ci";
-import { IoPricetagOutline } from "react-icons/io5";
-
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
