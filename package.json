@@ -4,7 +4,9 @@
   "description": "This is the setup of backend for tutedude full stack development assessment.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js", 
+    "dev": "nodemon index.js",         
+    "build": "npm run build"          
   },
   "author": "Ravi Kumar",
   "license": "ISC",
