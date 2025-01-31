@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const authMiddleware = require('../middleware/auth');
-
+const multer = require("multer");
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 // User Sign-Up
 router.post('/signup', userController.signUp);
 
@@ -16,7 +18,7 @@ router.get('/', userController.getAllUsers);
 router.get('/:username', userController.getUserProfile);
 
 // Update User Profile (protected route)
-router.put('/profile', authMiddleware, userController.updateUserProfile);
+router.patch('/:username',upload.single("avatar"),userController.updateUserProfile);
 
 // Delete User Account (protected route)
 router.delete('/profile', authMiddleware, userController.deleteUser);

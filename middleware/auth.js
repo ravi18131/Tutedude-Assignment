@@ -3,7 +3,7 @@ const userModel = require("../models/User");
 
 const authMiddleware = async (req, res, next) => {
   const authHeader = req.headers.authorization;
-
+  console.log("authHeader: ", authHeader)
   // Check if token is present in the Authorization header
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     console.log("No token provided in the Authorization header.");

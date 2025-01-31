@@ -97,27 +97,71 @@ const getUserProfile = async (req, res) => {
 };
 
 // Update User Profile
+
 const updateUserProfile = async (req, res) => {
-    const { avatar, bio, hobbies, interests } = req.body;
+    const { username } = req.params; // Extract username as a string
+
+    if (!username) {
+        return res.status(400).json({ success: false, message: "Username is required" });
+    }
 
     try {
-        const user = await User.findById(req.user.id);
+        // Extract form data from req.body
+        const { bio, hobbies, interests, email } = req.body; // Parsed by `multer` or another middleware
+        const avatar = req.file; // File uploaded by `multer`
+        // Find the user by username
+        const user = await User.findOne({ username });
         if (!user) {
             return res.status(404).json({ success: false, message: "User not found" });
         }
 
-        // Update user fields if provided
-        if (avatar) user.profileDetails.avatar = avatar;
-        if (bio) user.profileDetails.bio = bio;
-        if (hobbies) user.profileDetails.hobbies = hobbies;
-        if (interests) user.profileDetails.interests = interests;
+        let avatarUrl = user.profileDetails.avatar;
 
-        // Save the updated user
-        await user.save();
+        // Handle avatar upload to Cloudinary if a new avatar file is provided
+        if (avatar) {
+            const avatarBuffer = avatar.buffer;
+            const mimeType = avatar.mimetype;
+            const base64Data = Buffer.from(avatarBuffer).toString("base64");
+            const avatarUri = `data:${mimeType};base64,${base64Data}`;
 
-        return res.status(200).json({ success: true, message: "Profile updated successfully" });
+            const uploadResult = await uploadToCloudinary(avatarUri, avatar.originalname);
+            if (uploadResult.success && uploadResult.result) {
+                // Delete the previous avatar from Cloudinary
+                if (user.profileDetails.avatar) {
+                    await deleteFromCloudinary(user.profileDetails.avatar);
+                }
+                avatarUrl = uploadResult.result.secure_url;
+            }
+        }
+
+        // Check if the email is updated and mark the user as unverified
+        let isVerified = user.isVerified;
+        if (email && email !== user.email) {
+            isVerified = false;
+        }
+
+        // Update the user fields
+        const updatedUser = await User.findOneAndUpdate(
+            { username }, // Match by username (string)
+            {
+                email,
+                profileDetails: {
+                    bio: bio || user.profileDetails.bio,
+                    hobbies: hobbies ? JSON.parse(hobbies) : user.profileDetails.hobbies,
+                    interests: interests ? JSON.parse(interests) : user.profileDetails.interests,
+                    avatar: avatarUrl,
+                },
+                isVerified,
+                updatedAt: Date.now(),
+            },
+            { new: true }
+        );
+
+        console.log("updatedUser", updatedUser);
+
+        return res.status(200).json({ success: true, data: updatedUser });
     } catch (error) {
-        console.error(error);
+        console.error("Error updating user profile:", error);
         return res.status(500).json({ success: false, message: "Internal server error" });
     }
 };
