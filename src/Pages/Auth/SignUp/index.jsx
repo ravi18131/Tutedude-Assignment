@@ -13,7 +13,6 @@ import {
   CircularProgress,
 } from "@mui/material";
 
-import GoogleImg from "../../../assets/images/googleImg.png";
 import { postData } from "../../../utils/api";
 import { useNavigate } from "react-router-dom";
 
@@ -85,10 +84,6 @@ const SignUp = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleGoogleLogin = () => {
-    window.open(`${process.env.REACT_APP_API_URL}/auth/google`, "_self");
   };
 
   useEffect(() => {
@@ -246,29 +241,6 @@ const SignUp = () => {
               </NavLink>
             </Typography>
           </form>
-
-          <Typography
-            variant="h6"
-            sx={{
-              textAlign: "center",
-              fontWeight: "500",
-              color: "var(--textLight)",
-              fontSize: "1rem",
-              marginTop: "1.5rem",
-              marginBottom: "0.25rem",
-            }}
-          >
-            Or continue with Google
-          </Typography>
-
-          <Button
-            className="loginWithGoogle mt-2"
-            variant="outlined"
-            fullWidth
-            onClick={handleGoogleLogin}
-          >
-            <img src={GoogleImg} /> Sign In with Google
-          </Button>
         </Card>
       </Box>
     </Box>

@@ -6,6 +6,7 @@ import {
     Box,
     Typography,
     Button,
+    Container,
     Avatar,
     CircularProgress,
     Paper,
@@ -20,7 +21,7 @@ const FriendProfile = () => {
     const [mutualConnections, setMutualConnections] = useState(null);
     const [loading, setLoading] = useState(true);
     const { showSnackbar } = useSnackbar();
-    
+
     const user = localStorage.getItem("user");
     const parseUserData = user ? JSON.parse(user) : null; // Ensure parseUserData is safely parsed
 
@@ -127,9 +128,9 @@ const FriendProfile = () => {
     };
 
     return (
-        <>
+        <Container maxWidth="sm">
             <Box display="flex" justifyContent="center" mt={4}>
-                <Paper sx={{ width: "350px", height: "320px", p: 3, borderRadius: "0.5rem", border: "1px solid var(--borderCool)", background: "var(--bgLight)" }}>
+                <Paper sx={{p: 3, borderRadius: "0.5rem", border: "1px solid var(--borderCool)", background: "var(--bgLight)" }}>
                     <Box display="flex" alignItems="center" mb={3}>
                         <Avatar
                             src={profileData?.profileDetails?.avatar || ""}
@@ -199,7 +200,7 @@ const FriendProfile = () => {
                     />
                 ))}
             </div>
-        </>
+        </Container>
     );
 };
 

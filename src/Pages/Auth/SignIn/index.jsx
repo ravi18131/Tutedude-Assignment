@@ -13,7 +13,6 @@ import {
   CircularProgress,
 } from "@mui/material";
 
-import GoogleImg from "../../../assets/images/googleImg.png";
 import { postData } from "../../../utils/api";
 
 const SignIn = () => {
@@ -116,11 +115,6 @@ const SignIn = () => {
       }
     }
   }, []);
-
-  const handleGoogleLogin = () => {
-    // Redirect user to Google for authentication
-    window.open(`${process.env.REACT_APP_API_URL}/auth/google`, "_self");
-  };
 
   return (
     <Box component="section" className="section signInPage">
@@ -235,29 +229,6 @@ const SignIn = () => {
               </NavLink>
             </Typography>
           </form>
-
-          <Typography
-            variant="h6"
-            sx={{
-              textAlign: "center",
-              fontWeight: "500",
-              color: "var(--textLight)",
-              fontSize: "1rem",
-              marginTop: "1.5rem",
-              marginBottom: "0.25rem",
-            }}
-          >
-            Or continue with Google
-          </Typography>
-
-          <Button
-            className="loginWithGoogle mt-2"
-            fullWidth
-            variant="outlined"
-            onClick={handleGoogleLogin}
-          >
-            <img src={GoogleImg} /> Sign In with Google
-          </Button>
         </Card>
       </Box>
     </Box>

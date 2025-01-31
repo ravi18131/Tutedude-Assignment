@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/src/Components/showdata
 /.env
 /.pnp
 .pnp.js

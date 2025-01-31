@@ -55,7 +55,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <section className="loginSection">
+    <section className="loginSection section">
       <div className="container">
         <div className="row reset-password">
           <div className="col-12 col-xl-6 col-lg-6 col-md-12 left">
@@ -109,11 +109,6 @@ const ForgotPassword = () => {
                     alt="Logo"
                     width={70}
                     height={70}
-                    sx={{
-                      background: "rgba(0, 0, 0, 0.8)",
-                      borderRadius: "50%",
-                      border: "1px solid var(--borderColor)",
-                    }}
                   />
                   <Typography
                     variant="h1"
