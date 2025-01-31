@@ -9,7 +9,6 @@ router.get('/:username', authMiddleware, friendRequestController.getFriendReques
 
 router.get('/friends-list/:username', authMiddleware, friendRequestController.getFriendsList);
 
-
 // Get a single friend request by ID
 router.get('/mutual-connections', friendRequestController.getMutualConnections);
 
@@ -17,7 +16,7 @@ router.get('/mutual-connections', friendRequestController.getMutualConnections);
 router.post('/', friendRequestController.sendFriendRequest);
 
 // Accept/Reject a friend request
-router.put('/:id', friendRequestController.updateFriendRequestStatus);
+router.put('/:id', authMiddleware, friendRequestController.updateFriendRequestStatus);
 
 // Delete a friend request
 router.delete('/:id', friendRequestController.deleteFriendRequest);
