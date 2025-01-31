@@ -6,8 +6,6 @@ const FriendsListCard = ({ item }) => {
         <Box display="flex" justifyContent="center" mt={4}>
             <Paper
                 sx={{
-                    width: "300px",
-                    height: "270px",
                     p: 3,
                     borderRadius: "0.5rem",
                     border: "1px solid var(--borderCool)",
@@ -16,36 +14,36 @@ const FriendsListCard = ({ item }) => {
             >
                 <Box display="flex" alignItems="center" mb={3}>
                     <Avatar
-                        src={item?.sender?.profileDetails?.avatar || ""}
+                        src={item?.profileDetails?.avatar || ""}
                         alt="avatar"
                         sx={{ width: 80, height: 80, mr: 2, border: "1px solid var(--borderCool)" }}
                     />
                     <Box>
-                        <Typography variant="h6">{item.sender?.username}</Typography>
+                        <Typography variant="h6">{item.username}</Typography>
                         <Typography variant="body1" color="textSecondary">
-                            {item?.sender?.profileDetails?.bio}
+                            {item?.profileDetails?.bio}
                         </Typography>
                     </Box>
                 </Box>
 
                 <Typography variant="body1">
-                    <strong>Email:</strong> {item.sender?.email}
+                    <strong>Email:</strong> {item.email}
                 </Typography>
 
-                {item?.sender?.profileDetails?.hobbies && (
+                {item?.profileDetails?.hobbies && (
                     <Typography variant="body1">
                         <strong>Hobbies:</strong>{" "}
-                        {item?.sender?.profileDetails?.hobbies.length > 0
-                            ? item?.sender?.profileDetails?.hobbies.join(", ")
+                        {item?.profileDetails?.hobbies.length > 0
+                            ? item?.profileDetails?.hobbies.join(", ")
                             : "No hobbies listed."}
                     </Typography>
                 )}
 
-                {item?.sender?.profileDetails?.interests && (
+                {item?.profileDetails?.interests && (
                     <Typography variant="body1">
                         <strong>Interested:</strong>{" "}
-                        {item?.sender?.profileDetails?.interests.length > 0
-                            ? item?.sender?.profileDetails?.interests.join(", ")
+                        {item?.profileDetails?.interests.length > 0
+                            ? item?.profileDetails?.interests.join(", ")
                             : "No interests listed."}
                     </Typography>
                 )}

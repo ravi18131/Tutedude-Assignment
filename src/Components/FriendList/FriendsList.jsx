@@ -36,11 +36,11 @@ const FriendRequests = () => {
     }
 
     return (
-        <Box  sx={{ mx: 4 }}>
+        <Box  sx={{ mx: 12 }}>
             {friendRequests.length > 0 ? (
-                <Grid container spacing={3}>
+                <Grid container spacing={2}>
                     {friendRequests.map((request) => (
-                        <Grid item xs={12} sm={6} md={4} key={request.id}>
+                        <Grid item xs={12} sm={4} md={6} key={request.id}>
                             <FriendsListCard
                                 item={request}
                             />

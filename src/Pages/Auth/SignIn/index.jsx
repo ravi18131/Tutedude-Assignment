@@ -73,8 +73,7 @@ const SignIn = () => {
         const user = {
           username: res.user?.username,
           email: res.user?.email,
-          userId: res.user?.id,
-          avatar: res.user?.avatar || "",
+          avatar: res.user?.profileDetails?.avatar || "",
         };
 
         localStorage.setItem("user", JSON.stringify(user));
@@ -99,7 +98,6 @@ const SignIn = () => {
       const token = urlParams.get("token");
       const username = urlParams.get("username");
       const email = urlParams.get("email");
-      const userId = urlParams.get("userId");
       const avatar = urlParams.get("avatar");
 
       if (token) {
@@ -108,7 +106,7 @@ const SignIn = () => {
         localStorage.setItem("token", token); // Save token to local storage
         localStorage.setItem(
           "user",
-          JSON.stringify({ username, email, userId, avatar })
+          JSON.stringify({ username, email,  avatar })
         ); // Save user data to local storage
         showSnackbar("Login Successful!!", "success", "#aadbaa");
         history("/");

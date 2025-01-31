@@ -18,7 +18,7 @@ const FriendProfile = () => {
     const [profileData, setProfileData] = useState(null);
     const [recommendations, setRecommendations] = useState([]);
     const [checkConnection, setCheckConnection] = useState(null);
-    const [mutualConnections, setMutualConnections] = useState(null);
+    const [mutualConnections, setMutualConnections] = useState([]);
     const [loading, setLoading] = useState(true);
     const { showSnackbar } = useSnackbar();
 
@@ -83,7 +83,8 @@ const FriendProfile = () => {
         const fetchMutualConnections = async () => {
             try {
                 const response = await fetchDataFromApi(`/api/friend-requests/mutual-connections?sender=${parseUserData.username}&receiver=${username}`);
-                setMutualConnections(response);
+                setMutualConnections(response.data);
+                console.log(response.data)
             } catch (error) {
                 console.error("Error fetching mutual connections:", error);
             }
@@ -130,7 +131,7 @@ const FriendProfile = () => {
     return (
         <Container maxWidth="sm">
             <Box display="flex" justifyContent="center" mt={4}>
-                <Paper sx={{p: 3, borderRadius: "0.5rem", border: "1px solid var(--borderCool)", background: "var(--bgLight)" }}>
+                <Paper sx={{ p: 3, borderRadius: "0.5rem", border: "1px solid var(--borderCool)", background: "var(--bgLight)" }}>
                     <Box display="flex" alignItems="center" mb={3}>
                         <Avatar
                             src={profileData?.profileDetails?.avatar || ""}
@@ -157,7 +158,7 @@ const FriendProfile = () => {
                         </Typography>
                     )}
 
-                    <Typography variant="body1"><strong>Mutual Connections:</strong> {mutualConnections?.length || "0"}</Typography>
+                    <Typography variant="body1"><strong>Mutual Connections:</strong> {mutualConnections.length>0 ? mutualConnections.length : "0"}</Typography>
 
                     {
                         parseUserData?.username !== profileData.username ? (

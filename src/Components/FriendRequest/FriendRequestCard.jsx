@@ -6,34 +6,69 @@ const FriendRequestCard = ({ item, changeStatus }) => {
         <Box display="flex" justifyContent="center" mt={4}>
             <Paper
                 sx={{
-                    width: "300px",
-                    height: "300px",
-                    p: 3,
+                    p: 2,
                     borderRadius: "0.5rem",
                     border: "1px solid var(--borderCool)",
                     background: "var(--bgLight)",
+                    maxWidth: "400px", // Limit the width of the card
+                    overflow: "hidden", // Ensure no content escapes the card
+                    textOverflow: "ellipsis", // Handle text overflow gracefully
                 }}
             >
                 <Box display="flex" alignItems="center" mb={3}>
                     <Avatar
                         src={item?.sender?.profileDetails?.avatar || ""}
                         alt="avatar"
-                        sx={{ width: 80, height: 80, mr: 2, border: "1px solid var(--borderCool)" }}
+                        sx={{
+                            width: 80,
+                            height: 80,
+                            mr: 2,
+                            border: "1px solid var(--borderCool)",
+                            flexShrink: 0, // Prevent shrinking of the avatar
+                        }}
                     />
                     <Box>
-                        <Typography variant="h6">{item.sender?.username}</Typography>
-                        <Typography variant="body1" color="textSecondary">
+                        <Typography 
+                            variant="h6" 
+                            noWrap // Ensure the username does not overflow
+                        >
+                            {item.sender?.username}
+                        </Typography>
+                        <Typography 
+                            variant="body1" 
+                            color="textSecondary" 
+                            sx={{ 
+                                overflow: "hidden", 
+                                textOverflow: "ellipsis", 
+                                whiteSpace: "nowrap", // Prevent text wrapping
+                                maxWidth: "300px", // Adjust as needed
+                            }}
+                        >
                             {item?.sender?.profileDetails?.bio}
                         </Typography>
                     </Box>
                 </Box>
 
-                <Typography variant="body1">
+                <Typography 
+                    variant="body1" 
+                    sx={{
+                        overflow: "hidden", 
+                        textOverflow: "ellipsis", 
+                        whiteSpace: "nowrap",
+                    }}
+                >
                     <strong>Email:</strong> {item.sender?.email}
                 </Typography>
 
                 {item?.sender?.profileDetails?.hobbies && (
-                    <Typography variant="body1">
+                    <Typography 
+                        variant="body1" 
+                        sx={{
+                            overflow: "hidden", 
+                            textOverflow: "ellipsis", 
+                            whiteSpace: "nowrap",
+                        }}
+                    >
                         <strong>Hobbies:</strong>{" "}
                         {item?.sender?.profileDetails?.hobbies.length > 0
                             ? item?.sender?.profileDetails?.hobbies.join(", ")
@@ -42,7 +77,14 @@ const FriendRequestCard = ({ item, changeStatus }) => {
                 )}
 
                 {item?.sender?.profileDetails?.interests && (
-                    <Typography variant="body1">
+                    <Typography 
+                        variant="body1" 
+                        sx={{
+                            overflow: "hidden", 
+                            textOverflow: "ellipsis", 
+                            whiteSpace: "nowrap",
+                        }}
+                    >
                         <strong>Interested:</strong>{" "}
                         {item?.sender?.profileDetails?.interests.length > 0
                             ? item?.sender?.profileDetails?.interests.join(", ")
